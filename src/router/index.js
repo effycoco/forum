@@ -1,5 +1,6 @@
 import PageHome from "@/components/PageHome.vue";
 import PageThreadShow from "@/components/PageThreadShow.vue";
+import NotFound from "@/components/PageNotFound.vue";
 import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     name: "ThreadShow",
     component: PageThreadShow,
     props: true,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 // create the router instance and pass the routes option
