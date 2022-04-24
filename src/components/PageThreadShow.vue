@@ -1,6 +1,6 @@
 <template>
   <!-- structure the contents of page-home component -->
-  <div v-for="thread in threads" :key="thread.id" class="col-large push-top">
+  <div class="col-large push-top">
     <h1>{{ thread.title }}</h1>
 
     <div class="post-list">
@@ -38,12 +38,23 @@
 <script>
 import srcData from "@/data.json";
 export default {
+  props: {
+    id: {
+      required: true,
+      type: String,
+    },
+  },
   data() {
     return {
       threads: srcData.threads,
       posts: srcData.posts,
       users: srcData.users,
     };
+  },
+  computed: {
+    thread() {
+      return this.threads.find((thread) => thread.id === this.id); // also available under this.$route.params.id
+    },
   },
   methods: {
     postById(postId) {
