@@ -1,16 +1,13 @@
 <template>
   <div class="container">
-    <page-home />
+    <!-- this component will always render the active page based on the route the user is visiting -->
+    <router-view />
   </div>
 </template>
 
 <script>
-import PageHome from "@/components/PageHome.vue";
 export default {
   name: "App",
-  components: {
-    PageHome,
-  },
 };
 </script>
 
