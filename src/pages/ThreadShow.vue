@@ -2,42 +2,18 @@
   <!-- structure the contents of page-home component -->
   <div class="col-large push-top">
     <h1>{{ thread.title }}</h1>
-
-    <div class="post-list">
-      <div v-for="postId in thread.posts" :key="postId" class="post">
-        <div class="user-info">
-          <a href="#" class="user-name">{{
-            userById(postById(postId).userId).name
-          }}</a>
-
-          <a href="#">
-            <img
-              class="avatar-large"
-              :src="userById(postById(postId).userId).avatar"
-              alt=""
-            />
-          </a>
-
-          <p class="desktop-only text-small">107 posts</p>
-        </div>
-
-        <div class="post-content">
-          <div>
-            <p>{{ postById(postId).text }}</p>
-          </div>
-        </div>
-
-        <div class="post-date text-faded">
-          {{ postById(postId).publishedAt }}
-        </div>
-      </div>
-    </div>
+    <post-list :posts="threadPosts"></post-list>
   </div>
 </template>
 
 <script>
 import srcData from "@/data.json";
+import PostList from "@/components/PostList.vue";
 export default {
+  name: "ThreadShow",
+  components: {
+    PostList,
+  },
   props: {
     id: {
       required: true,
@@ -48,20 +24,14 @@ export default {
     return {
       threads: srcData.threads,
       posts: srcData.posts,
-      users: srcData.users,
     };
   },
   computed: {
     thread() {
       return this.threads.find((thread) => thread.id === this.id); // also available under this.$route.params.id
     },
-  },
-  methods: {
-    postById(postId) {
-      return this.posts.find((post) => postId === post.id);
-    },
-    userById(userId) {
-      return this.users.find((user) => userId === user.id);
+    threadPosts() {
+      return this.posts.filter((post) => post.threadId === this.id);
     },
   },
 };
