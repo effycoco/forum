@@ -1,6 +1,6 @@
 # forum2
 
-A project from vueschool master class
+A project from vueschool (not finished yet)
 
 ## Project setup
 
